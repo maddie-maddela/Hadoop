@@ -58,6 +58,72 @@ The results can be seen here:
 
 ## Find the most common occupation among users
 
+This info can be obtained by working on the u.user dataset. The code is shown below.
+
+https://github.com/maddies-codespace/Hadoop/blob/6d3763ba02680d751f1ad638597591c14faedf04/CommonOccupation.py#L1-L15
+
+To run the code, use this command: python3 CommonOccupation.py u.user 
+
+The results can be seen here:
+
+![CommonOccupation](https://github.com/maddies-codespace/Hadoop/assets/141537679/443672a7-5ed2-4945-b7ae-207ddce2e1c1)
+
+In order to reduce it to only one result, we can change ‘for val in lst[0:10]:’ inside reducer_2() to ‘for val in lst[0:1]:’
 
 
-## Find the top 10 highest-rated movies with an average rating greater than 4.5
+## Find the top 10 most rated movies
+
+This info cannot be obtained by working on a single dataset. First, let us filter out the relevant movie IDs from the u.data dataset. The code is shown below.
+
+https://github.com/maddies-codespace/Hadoop/blob/6d3763ba02680d751f1ad638597591c14faedf04/TopRatedMovies.py#L1-L20
+
+To run the code, use this command: python3 TopRatedMovies.py u.data > out1 
+
+This will save the top 10 movie IDs as out1.
+
+The results can be seen here:
+
+![TopRatedMovies](https://github.com/maddies-codespace/Hadoop/assets/141537679/8eee24cb-0bfc-40b6-87e8-1cff71c25d9a)
+
+We now have to map these movie IDs to movie names using the u.item dataset. The code is shown below.
+
+https://github.com/maddies-codespace/Hadoop/blob/6d3763ba02680d751f1ad638597591c14faedf04/TopRatedMovies01.py#L1-L33
+
+To run the code, use this command: python3 TopRatedMovies01.py u.item out1 > out2
+
+![TopRatedMovies01](https://github.com/maddies-codespace/Hadoop/assets/141537679/3bd4757e-80e7-4e29-8798-52e406c414da)
+
+
+## Find the top 10 highest-rated movies by female users
+
+This info can be obtained by working with the u.user, u.data, and u.item datasets.
+
+First, we generate a list of movies with a 5 star rating. The code is shown below.
+
+https://github.com/maddies-codespace/Hadoop/blob/9d41caff9fee39944d58d06c04060ccd09818f28/TopRatedMoviesF.py#L1-L36
+
+To run the code, use this command: python3 TopRatedMoviesF.py u.user u.data 
+
+The output is shown below. 
+
+![TopRatedMoviesF](https://github.com/maddies-codespace/Hadoop/assets/141537679/8cf0f42f-314a-4ffe-9858-8dafb70343eb)
+
+The highlighted table above shows movie_id in column1 and no. of times it was reviewed in column2. What we want is the highest-rated movies list. The code needs to be modified to address that. Here is the new code.
+
+https://github.com/maddies-codespace/Hadoop/blob/9d41caff9fee39944d58d06c04060ccd09818f28/TopRatedMoviesF_modified.py#L1-L36
+
+To run the code, use this command: python3 TopRatedMoviesF_modified.py u.data out1
+
+The output is shown below. 
+
+![TopRatedMoviesF1](https://github.com/maddies-codespace/Hadoop/assets/141537679/f0f32b7c-ddb8-4cd7-bd53-c17840a8ba78)
+
+There are tons of movies with a 5 star rating. So, this sorted it based on 9’s in the movie ID. Now, we can map movie IDs with movie names using the TopRatedMovies01.py code from the previous section.
+
+https://github.com/maddies-codespace/Hadoop/blob/6d3763ba02680d751f1ad638597591c14faedf04/TopRatedMovies01.py#L1-L33
+
+To run the code, use this command: python3 TopRatedMovies01.py u.item out1 
+
+The output is shown below. 
+
+![TopRatedMoviesF2](https://github.com/maddies-codespace/Hadoop/assets/141537679/8d748cd2-655a-4328-a17d-52cabc61ed6b)
