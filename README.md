@@ -1,5 +1,4 @@
 # Hadoop Project
-Some coding work exploring the functionality of Hadoop
 
 The code below uses the MapReduce operations to query the MovieLens dataset and extract relevant information based on specific criteria. The dataset consists of several files, including u.data, u.item, ratings, u.users, and more. The dataset can be downloaded from [MovieLens](https://grouplens.org/datasets/movielens/100k/)
 
